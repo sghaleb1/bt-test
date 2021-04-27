@@ -26,6 +26,8 @@ function App() {
       .then((response) => response.json())
       .then((data) => setNewsData(data))
       .catch((error) => setHasError(true));
+
+    console.log('hasError', hasError)
   }, [searchData]);
 
   // ####################################################
@@ -34,7 +36,7 @@ function App() {
   // Included regex to ensure value search is only ASCII, as error occurs for none ASCII
   // ####################################################
   function updateSearch(val) {
-    const searchRegex = /^\w+$/
+    const searchRegex = /^[\w ]+$/
     setCurrentInput(val)
     if (val.length > 0 && val !== ' ') {
       if (searchRegex.test(val)) {
@@ -82,9 +84,9 @@ function App() {
             {/* Display newsApi if response success, else return 'Loading...' */}
             {newsData ? newsData.articles.map((newsItem) => (
               <NewsArticle data={newsItem} key={newsItem.url} />
-            )) 
-              : hasError ? <div className="request-response">No results found.</div> 
-              : <div className="request-response">Loading...</div>}
+            ))
+              : hasError ? <div className="request-response">No results found.<br></br>Too many calls made: Please try again later</div>
+                : <div className="request-response">Loading...</div>}
           </div>
         </article>
       </div>
