@@ -7,6 +7,7 @@ function App() {
   const [newsData, setNewsData] = useState();
   const [searchData, setSearchData] = useState('BT');
   const [currentInput, setCurrentInput] = useState('');
+  const [hasError, setHasError] = useState(false);
 
   const pageSize = 10;
   const dateFrom = '2021-04-26';
@@ -23,28 +24,27 @@ function App() {
   useEffect(() => {
     fetch(req)
       .then((response) => response.json())
-      .then((data) => setNewsData(data)) 
-      .catch((error) => console.log(error));
+      .then((data) => setNewsData(data))
+      .catch((error) => setHasError(true));
   }, [searchData]);
-  
+
   // ####################################################
-  // Only request newsApi only for correct input values, else error occurs.
+  // Only request newsApi for correct input values, else error occurs.
   // It was found that an error occurs when input is no value or 'space' 
   // Included regex to ensure value search is only ASCII, as error occurs for none ASCII
   // ####################################################
   function updateSearch(val) {
     const searchRegex = /^\w+$/
     setCurrentInput(val)
-    if(searchRegex.test(val)){
-      console.log(val)
-      if (val.length > 0 && val !== ' ') {
+    if (val.length > 0 && val !== ' ') {
+      if (searchRegex.test(val)) {
         setSearchData(val)
       }
     }
   }
 
   // ####################################################
-  // News Article - Each article is the chosen layout and css 
+  // News Article - Each article has the chosen layout and css 
   // ####################################################
   function NewsArticle({ data }) {
     return (
@@ -61,9 +61,12 @@ function App() {
     );
   }
 
-
+  // ####################################################
+  // Main React component 
+  // ####################################################
   return (
     <div className="main-app">
+
       <header className="app-header">
         <div className="app-nav">
           <a href="https://www.bt.com/"><img src={logo} className="app-logo" alt="logo" /></a>
@@ -79,9 +82,9 @@ function App() {
             {/* Display newsApi if response success, else return 'Loading...' */}
             {newsData ? newsData.articles.map((newsItem) => (
               <NewsArticle data={newsItem} key={newsItem.url} />
-            ))
-              : <div className="initial-loading">Loading...</div>}
-
+            )) 
+              : hasError ? <div className="request-response">No results found.</div> 
+              : <div className="request-response">Loading...</div>}
           </div>
         </article>
       </div>
@@ -91,6 +94,7 @@ function App() {
           Footer - News article search
         </div>
       </footer>
+
     </div>
   );
 }

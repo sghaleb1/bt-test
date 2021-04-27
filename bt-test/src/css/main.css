@@ -270,6 +270,16 @@ span {
   font-family: 'Calibri';
 }
 
+.main-app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container{
+  flex: 1;
+}
 /* =======================================================================
 header/footer style
 ======================================================================= */
@@ -329,6 +339,7 @@ Main article container, search bard and individual article styles
   margin: 0;
   padding: 5px;
   background-color: #5514b4;
+  min-height: 100vh;
 }
 
 .all-news-container > h1, .news {
@@ -357,6 +368,8 @@ Main article container, search bard and individual article styles
 /* =======================================================================
 No requests returned style
 ======================================================================= */
-.initial-loading {
+.request-response{
   color: #fff;
+  padding: 20px 0;
+  font-weight: bold;
 }
