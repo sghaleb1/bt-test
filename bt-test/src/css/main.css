@@ -246,11 +246,17 @@ textarea {
 
 
 
-/* ==========================================================================
-   
-   ========================================================================== */
+/* ##########################################################################
+
+NEW: ADDED CSS
+
+########################################################################## */
 
 
+
+/* =======================================================================
+Inital main elements styles
+======================================================================= */
 body {
   margin: 0;
   display: grid;
@@ -264,12 +270,19 @@ span {
   font-family: 'Calibri';
 }
 
+/* =======================================================================
+header/footer style
+======================================================================= */
 .app-header, .app-footer {
   color: #ffffff;
   font-family: 'Calibri';
   background-color: #5514b4;
   padding:7px;
- 
+}
+
+.app-footer {
+  box-sizing: border-box;
+  border-top: 1px solid #fff;
 }
 
 .app-nav{
@@ -290,10 +303,9 @@ span {
   height: auto;
 }
 
-/* .container{
-  padding: 10px;
-} */
-
+/* =======================================================================
+Inner body title style
+======================================================================= */
 .container-header {
   text-align: center;
   margin: 0 auto;
@@ -301,6 +313,17 @@ span {
   padding: 20px;
 }
 
+/* =======================================================================
+Main article container, search bard and individual article styles
+======================================================================= */
+.search-input{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
 
 .all-news-container {
   margin: 0;
@@ -318,7 +341,6 @@ span {
 }
 
 .news {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
   border-radius: 4px;
   background-color: #ffffff;
 }
@@ -332,15 +354,9 @@ span {
   font-weight: bold;
 }
 
-.search-input{
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  resize: vertical;
-}
-
+/* =======================================================================
+No requests returned style
+======================================================================= */
 .initial-loading {
   color: #fff;
 }
