@@ -66,12 +66,12 @@ function App() {
   function NewsArticle({ data }) {
     //console.log("content length = ",data.description)
     return (
-      <div className="news">
-        <h2 className="news_title">{data.title}</h2>
-        <span className="news_publisher">{data.source.name}</span>
-        <span className="news_author">{data.author}</span>
-        <p className="news_desc">{data.description.replace(/(.{150})..+/, "$1…")}</p>
-        <span className="news_url">{data.url}</span>
+      <div className="news-container">
+        <h2 className="news-title">{data.title}</h2>
+        <span className="news-publisher">{data.source.name}</span>
+        <span className="news-author">{data.author}</span>
+        <p className="news-desc">{data.description.replace(/(.{150})..+/, "$1…")}</p>
+        <span className="news-url">{data.url}</span>
       </div>
     );
   }
