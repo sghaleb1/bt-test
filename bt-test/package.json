@@ -2,7 +2,7 @@
   "name": "bt-test",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sghaleb1.github.io/bt-test",
+  "homepage": "http://sghaleb1.github.io/bt-test",
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
