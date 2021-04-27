@@ -252,8 +252,9 @@ textarea {
 
 
 body {
-  padding: 0;
   margin: 0;
+  display: grid;
+  grid-template-rows: auto auto auto;
 }
 
 body,
@@ -263,12 +264,23 @@ span {
   font-family: 'Calibri';
 }
 
-.app-header,
-.app-footer {
+.app-header, .app-footer {
   color: #ffffff;
   font-family: 'Calibri';
   background-color: #5514b4;
   padding:7px;
+ 
+}
+
+.app-nav{
+  margin: 0 auto;
+  max-width: 1154px;
+}
+
+.footer-content {
+  bottom: 0;
+  margin: 0 auto;
+  max-width: 1154px;
 }
 
 .app-logo {
@@ -284,27 +296,34 @@ span {
 
 .container-header {
   text-align: center;
+  margin: 0 auto;
+  max-width: 1154px;
+  padding: 20px;
 }
 
 
-.all-news {
+.all-news-container {
   margin: 0;
   padding: 5px;
-  background-color: lightgray;
+  background-color: #5514b4;
 }
 
-.all-news > h1, .news {
+.all-news-container > h1, .news {
   margin: 10px;
   padding: 5px;
+}
+.all-news {
+  margin: 0 auto;
+  max-width: 1154px;
 }
 
 .news {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-  border-radius: 7px;
-  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  background-color: #ffffff;
 }
 
-.news > h2, p, span {
+.news > h2, p, span, a {
   margin: 4px;
   font-size: 90%;
 }
@@ -320,4 +339,8 @@ span {
   border-radius: 4px;
   box-sizing: border-box;
   resize: vertical;
+}
+
+.initial-loading {
+  color: #fff;
 }

@@ -65,17 +65,17 @@ function App() {
   function NewsArticle({ data }) {
     //console.log("content length = ",data.description)
     return (
-      
-        <article className="news">
-          <header>
-            <h2 className="news-title">{data.title}</h2>
-          </header>
-          <span className="news-publisher">{data.source.name}</span>
-          <div className="news-content">
-            <p>{data.description.replace(/(.{150})..+/, "$1…")}</p>
-          </div>
-          <span className="news-url">{data.url}</span>
-        </article >
+
+      <article className="news">
+        <header>
+          <h2 className="news-title">{data.title}</h2>
+        </header>
+        <span className="news-publisher">{data.source.name}</span>
+        <div className="news-content">
+          <p>{data.description.replace(/(.{150})..+/, "$1…")}</p>
+        </div>
+        <a href={data.url} className="news-url">{data.url}</a>
+      </article >
     );
   }
 
@@ -83,22 +83,32 @@ function App() {
   return (
     <div className="main-app">
       <header className="app-header">
-        <img src={logo} className="app-logo" alt="logo" />
+        <div className="app-nav">
+          <a href="https://www.bt.com/"><img src={logo} className="app-logo" alt="logo" /></a>
+
+        </div>
+
       </header>
       <div className="container">
         <h1 className="container-header">BT React Code Test - by Shahab Ghaleb - 27/04/21</h1>
 
-        <article className="all-news">
-          <input className="search-input" value={currentInput} onChange={e => updateSearch(e.target.value)} placeholder="Search..."/>
+        <article className="all-news-container">
+        <div className="all-news">
+          <input className="search-input" value={currentInput} onChange={e => updateSearch(e.target.value)} placeholder="Search..." />
           {newsData ? newsData.articles.map((newsItem) => (
             <NewsArticle data={newsItem} key={newsItem.url} />
           ))
-            : "Loading"}
+            : <div className="initial-loading">Loading</div>}
+            </div>
         </article>
+        
 
       </div>
-      <footer className="app-header">
-        Footer - News article search
+      <footer className="app-footer">
+        <div className="footer-content">
+          Footer - News article search
+        </div>
+
       </footer>
     </div>
   );
