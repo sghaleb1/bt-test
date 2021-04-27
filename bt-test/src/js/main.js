@@ -41,16 +41,22 @@ function App() {
     }
     
   }
+    //Dummy data due to API request limit reached
+    const test_title = "Forerunner’s Eurie Kim will share why she invested in Oura on Extra Crunch Live";
+    const test_data = `Oxygen and other supplies are unlikely to spare India further catastrophe. In Brazil, 
+                  Russia’s Sputnik V vaccine isn’t recommended. Greece eased its Oxygen and other supplies 
+                  are unlikely to spare India further catastrophe. In Brazil, Russia’s Sputnik V vaccine isn’t 
+                  recommended. Greece eased`;
+    const test_publisher = "New York Times";
+    const test_url = "https://blog.google/outreach-initiatives/diversity/a-djs-mission-to-tell-asian-american-stories-track-by-track/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+blogspot%2FMKuf+%28The+Keyword+%7C+Official+Google+Blog%29"
 
-  function NewsArticle({ data }) {
-    console.log("content length = ",data.description)
+  function TestNewsArticle() {
     return (
       <div className="news">
-        <h2 className="news_title">{data.title}</h2>
-        <span className="news_publisher">{data.source.name}</span>
-        <span className="news_author">{data.author}</span>
-        <p className="news_desc">{data.description.replace(/(.{150})..+/, "$1…")}</p>
-        <span className="news_url">{data.url}</span>
+        <h2 className="news_title">{test_title}</h2>
+        <span className="news_author">{test_publisher}</span>
+        <p className="news_desc">{test_data.replace(/(.{150})..+/, "$1…")}</p>
+        <span className="news_url">{test_url}</span>
       </div>
     );
   }
