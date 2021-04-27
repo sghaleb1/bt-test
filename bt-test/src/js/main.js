@@ -11,8 +11,10 @@ function App() {
   const pageSize = 10;
   const dateFrom = '2021-04-26';
 
+  const proxyUrl = "https://cors-anywhere.herokuapp.com/"
+
   const apiKey = "3e7201adfdf84a0691f916e3488a31d8";
-  const url = `https://newsapi.org/v2/everything?q=${searchData}&from=${dateFrom}&pageSize=${pageSize}&sortBy=popularity&apiKey=${apiKey}`
+  const url = `${proxyUrl}https://newsapi.org/v2/everything?q=${searchData}&from=${dateFrom}&pageSize=${pageSize}&sortBy=popularity&apiKey=${apiKey}`
   const req = new Request(url);
 
   // ####################################################
