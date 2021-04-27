@@ -13,7 +13,7 @@ function App() {
 
   const proxyUrl = "https://cors-anywhere.herokuapp.com/"
 
-  const apiKey = "3e7201adfdf84a0691f916e3488a31d8";
+  const apiKey = "64462cf79b3d449483ea5f2692e95e60";
   const url = `${proxyUrl}https://newsapi.org/v2/everything?q=${searchData}&from=${dateFrom}&pageSize=${pageSize}&sortBy=popularity&apiKey=${apiKey}`
   const req = new Request(url);
 
@@ -30,11 +30,16 @@ function App() {
   // ####################################################
   // Only request newsApi only for correct input values, else error occurs.
   // It was found that an error occurs when input is no value or 'space' 
+  // Included regex to ensure value search is only ASCII, as error occurs for none ASCII
   // ####################################################
   function updateSearch(val) {
+    const searchRegex = /^\w+$/
     setCurrentInput(val)
-    if (val.length > 0 && val !== ' ') {
-      setSearchData(val)
+    if(searchRegex.test(val)){
+      console.log(val)
+      if (val.length > 0 && val !== ' ') {
+        setSearchData(val)
+      }
     }
   }
 
