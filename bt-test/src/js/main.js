@@ -12,10 +12,8 @@ function App() {
   const pageSize = 10;
   const dateFrom = '2021-04-26';
 
-  const proxyUrl = "https://cors-anywhere.herokuapp.com/"; 
-
   const apiKey = "64462cf79b3d449483ea5f2692e95e60";
-  const url = `${proxyUrl}https://newsapi.org/v2/everything?q=${searchData}&from=${dateFrom}&pageSize=${pageSize}&sortBy=popularity&apiKey=${apiKey}`
+  const url = `https://newsapi.org/v2/everything?q=${searchData}&from=${dateFrom}&pageSize=${pageSize}&sortBy=popularity&apiKey=${apiKey}`
   const req = new Request(url);
 
   // ####################################################
@@ -74,7 +72,7 @@ function App() {
       </header>
 
       <div className="container">
-        <h1 className="container-header">BT React Code Test - by Shahab Ghaleb - 27/04/21</h1>
+        <h1 className="container-header">BT React Code Test - by Shahab Ghaleb - 28/04/21</h1>
 
         <article className="all-news-container">
           <div className="all-news">
