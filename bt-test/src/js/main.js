@@ -12,7 +12,7 @@ function App() {
   const pageSize = 10;
   const dateFrom = '2021-04-26';
 
-  const proxyUrl = "https://cors-anywhere.herokuapp.com/"
+  const proxyUrl = "https://cors-anywhere.herokuapp.com/"; 
 
   const apiKey = "64462cf79b3d449483ea5f2692e95e60";
   const url = `${proxyUrl}https://newsapi.org/v2/everything?q=${searchData}&from=${dateFrom}&pageSize=${pageSize}&sortBy=popularity&apiKey=${apiKey}`
@@ -25,9 +25,7 @@ function App() {
     fetch(req)
       .then((response) => response.json())
       .then((data) => setNewsData(data))
-      .catch((error) => setHasError(true));
-
-    console.log('hasError', hasError)
+      .catch((error) => setHasError('error', error));
   }, [searchData]);
 
   // ####################################################
@@ -82,11 +80,10 @@ function App() {
           <div className="all-news">
             <input className="search-input" value={currentInput} onChange={e => updateSearch(e.target.value)} placeholder="Search..." />
             {/* Display newsApi if response success, else return 'Loading...' */}
-            {newsData ? newsData.articles.map((newsItem) => (
-              <NewsArticle data={newsItem} key={newsItem.url} />
-            ))
-              : hasError ? <div className="request-response">No results found.<br></br>Too many calls made: Please try again later</div>
-                : <div className="request-response">Loading...</div>}
+            {hasError ? <div className="request-response">No results found.<br></br>Too many calls made: Please try again later</div>
+              : newsData ? newsData.articles.map((newsItem) => (
+                <NewsArticle data={newsItem} key={newsItem.url} />
+              )) : <div className="request-response">Loading...</div>}
           </div>
         </article>
       </div>
