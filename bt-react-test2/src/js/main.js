@@ -2,7 +2,7 @@ import '../css/main.css';
 import logo from '../logo.svg';
 import React, { useEffect, useState } from "react";
 
-function App() {
+export default function App() {
 
   const [newsData, setNewsData] = useState();
   const [searchData, setSearchData] = useState('BT');
@@ -10,26 +10,27 @@ function App() {
 
   const pageSize = 10;
   const dateFrom = '2021-04-26';
-  const sortBy = 'popularity';
+  const [sortBy, setSortBy] = useState('popularity');
 
-  const apiKey = "64462cf79b3d449483ea5f2692e95e60";
-  const url = `https://newsapi.org/v2/everything?q=${searchData}&from=${dateFrom}&pageSize=${pageSize}&sortBy=${sortBy}&apiKey=${apiKey}`
+  const apiKey = "3e7201adfdf84a0691f916e3488a31d8";
+  const url = `https://newsapi.org/v2/everything?q=${searchData}&from=${dateFrom}&pageSize=${pageSize}&page=1&sortBy=${sortBy}&apiKey=${apiKey}`
   const req = new Request(url);
 
-  // useEffect hook used to request NewsApi at beginning and when search input onChange.
+  // # useEffect hook used to request NewsApi at beginning and when search input onChange.
   useEffect(() => {
     fetch(req)
       .then((response) => response.json())
       .then((data) => setNewsData(data))
       .catch((error) => console.log(error));
-  }, [searchData]);
+  }, [searchData, sortBy]);
 
 
-  // News Main - Handle news results and API errors
+  // # News Main - Handle news results and API errors
   function News() {
     if (newsData) {
+      console.log('newsData', newsData)
       //If no results found or wrong search input.
-      if (newsData.totalResults <= 0 || newsData.code === 'apiKeyMissing') {
+      if (newsData.totalResults <= 0 || newsData.code === 'apiKeyMissing' || newsData.code === 'parametersMissing') {
         return <div className="request-response">No results found.</div>
 
         //If API request limit reached
@@ -50,23 +51,45 @@ function App() {
     }
   }
 
-  // News Article - Each article has the chosen layout and css 
+  // # News Article - Each article has the chosen layout and css 
   function NewsArticle({ data }) {
+
+    let newsTitle = data.title != null ? data.title.replace(/(.{55})..+/, "$1…") : 'No title available';
+    let newsPublisher = data.source.name != null ? data.source.name : 'No publisher name available';
+    let newsDesc = data.description != null ? data.description.replace(/(.{150})..+/, "$1…") : 'No description available';
+    let newsUrl = data.url != null ? data.url : 'No url available';
+    let newsImage = data.urlToImage != null ? data.urlToImage : 'https://i.ibb.co/BB2d5kR/depositphotos-247872612-stock-illustration-no-image-available-icon-vector.jpg';
+
+
     return (
       <article className="news">
         <header>
-          <h2 className="news-title">{data.title}</h2>
+          <h2 className="news-title">{newsTitle}</h2>
         </header>
-        <span className="news-publisher">{data.source.name}</span>
+        <img src={newsImage} alt={data.urlToImage}></img>
+        <span className="news-publisher">{newsPublisher}</span>
         <div className="news-content">
-          <p>{data.description.replace(/(.{150})..+/, "$1…")}</p>
+          <p>{newsDesc}</p>
         </div>
-        <a href={data.url} className="news-url">{data.url}</a>
+        <footer>
+        <a href={newsUrl} className="news-url">{newsUrl}</a> 
+        </footer>
+
       </article >
     );
   }
 
-  // Main React component 
+  function SortByDropDown() {
+    return (
+      <select onChange={(event) => setSortBy(event.target.value)} value={sortBy}>
+        <option value="relevancy">Relevancy</option>
+        <option value="popularity">Popularity</option>
+        <option value="publishedAt">Newest</option>
+      </select>
+    )
+  }
+
+  // # Main React component 
   return (
     <div className="main-app">
 
@@ -82,11 +105,19 @@ function App() {
         <h1 className="container-header">BT React Code Test - by Shahab Ghaleb - 28/04/21</h1>
         <article className="all-news-container">
           <div className="all-news">
-            <input className="search-input" value={currentInput} onChange={e => {
-              setCurrentInput(e.target.value);
-              setSearchData(e.target.value);
-            }} placeholder="Search..." />
-            <News />
+            {/* Search section */}
+            <div className="search-container">
+              <input className="search-input" value={currentInput} onChange={e => {
+                setCurrentInput(e.target.value);
+                setSearchData(e.target.value);
+              }} placeholder="Search..." />
+              <SortByDropDown className="search-drop-down" />
+            </div>
+
+              <div className="news-holder">
+                <News />
+              </div>
+            
           </div>
         </article>
       </div>
@@ -101,5 +132,4 @@ function App() {
     </div>
   );
 }
-export default App;
 
